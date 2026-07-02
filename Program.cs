@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
-Console.WriteLine(connectionString);
+Console.WriteLine($"Connection String: {connectionString}");
 builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
