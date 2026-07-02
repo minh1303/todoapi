@@ -39,6 +39,4 @@ app.UseAuthorization();
 app.MapControllers();
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
-
 app.Run();
