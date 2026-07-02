@@ -1,0 +1,7 @@
+appsettings.Development.json
+appsettings.Production.json
+*.user
+secrets.json
+.env
+bin/
+obj/
