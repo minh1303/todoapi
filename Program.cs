@@ -8,16 +8,21 @@ using TodoApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+// 🔥 FORCE DEBUG OUTPUT - MUST BE HERE
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"===== CONNECTION STRING: '{connectionString}' =====");
+
+// Log to file as well (just in case)
+System.IO.File.WriteAllText("/tmp/connection-string.txt", connectionString ?? "NULL");
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseNpgsql(connectionString);
-    Console.WriteLine($"Connection String: {connectionString}");
 });
+
 builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -42,6 +47,5 @@ app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-// Configure the HTTP request pipeline.
 
 app.Run();
