@@ -1,7 +1,7 @@
 appsettings.Development.json
 appsettings.Production.json
 appsettings.json
-
+frontend/
 *.user
 secrets.json
 .env
