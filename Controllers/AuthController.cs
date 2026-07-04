@@ -20,7 +20,10 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
     {
         var token =  await authService.LoginAsync(request.Email, request.Password);
         if (token == null) return Unauthorized("Username or password is incorrect");
-        return Ok(token);
+        return Ok(new 
+        {
+            token
+        });
     }
 }
 
